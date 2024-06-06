@@ -12,6 +12,8 @@ from .utils import detectUser, send_verification_email
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 from django.core.exceptions import PermissionDenied
+from vendor.models import Vendor
+
 
 # Restrict the vendor from accessing the student page
 def check_role_vendor(user):
