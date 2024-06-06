@@ -1,4 +1,5 @@
 from vendor.models import Vendor
+from django.conf import settings
 
 def get_vendor(request):
     try:
