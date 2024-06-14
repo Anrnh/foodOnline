@@ -11,10 +11,6 @@ from .models import Cart
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
-#from django.contrib.gis.geos import GEOSGeometry
-#from django.contrib.gis.measure import D # ``D`` is a shortcut for ``Distance``
-#from django.contrib.gis.db.models.functions import Distance
-
 from datetime import date, datetime
 #from orders.forms import OrderForm
 
@@ -135,3 +131,24 @@ def delete_cart(request, cart_id):
                 return JsonResponse({'status': 'Failed', 'message': 'Cart Item does not exist!'})
         else:
             return JsonResponse({'status': 'Failed', 'message': 'Invalid request!'})
+        
+def search(request):
+    if not 'address' in request.GET:
+        return redirect('marketplace')
+    else:
+        address = request.GET['address']
+        keyword = request.GET['keyword']
+
+        # get vendor ids that has the food item the user is looking for
+        fetch_vendors_by_fooditems = FoodItem.objects.filter(food_title__icontains=keyword, is_available=True).values_list('vendor', flat=True)
+
+        vendors = Vendor.objects.filter(Q(id__in=fetch_vendors_by_fooditems) | Q(vendor_name__icontains=keyword, is_approved=True, user__is_active=True))
+        
+        vendor_count = vendors.count()
+        context = {
+            'vendors': vendors,
+            'vendor_count': vendor_count,
+            'source_location': address,
+        }
+
+        return render(request, 'marketplace/listings.html', context)
