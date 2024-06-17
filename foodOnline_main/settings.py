@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'vendor',
     'menu',
     'marketplace',
+    'students',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +73,8 @@ TEMPLATES = [
                 'accounts.context_processors.get_vendor',
                 'marketplace.context_processors.get_cart_counter',
                 'marketplace.context_processors.get_cart_amounts',
+                'accounts.context_processors.get_user_profile',
+                'accounts.context_processors.get_paypal_client_id',
 
             ],
         },
@@ -158,3 +162,7 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'UNIMAS Student Pavilion <unimasstudentpavilion@gmail.com>'
+
+PAYPAL_CLIENT_ID = config('PAYPAL_CLIENT_ID')
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'

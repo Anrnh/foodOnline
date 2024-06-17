@@ -1,10 +1,9 @@
 <div class="user-account-nav user-account-sidebar">
     <div class="user-nav-list">
         <ul>
-            <li class="active"><a href="studentDashboard.html"><i class="icon-dashboard3"></i>Dashboard</a></li>
-            <li><a href="restaurant-restaurant.html"><i class="icon-add_shopping_cart"></i>My Orders</a></li>
-            <li><a href="restaurant-menu-builder.html"><i class="icon-build"></i>Profile Settings</a></li>
-            <li><a href="restaurants-orders.html"><i class="icon-unlock-alt"></i>Change Password</a></li>
+            <li class="{% if '/studentDashboard/' == request.path or '/student/' == request.path %}active{% endif %}"><a href="{% url 'student' %}"><i class="icon-dashboard3"></i>Dashboard</a></li>
+            <li class="{% if '/my_orders/' in request.path or '/order_detail/' in request.path %}active{% endif %}"><a href="{% url 'student_my_orders' %}"><i class="icon-add_shopping_cart"></i>My Orders</a></li>
+            <li class="{% if '/profile/' in request.path %}active{% endif %}"><a href="{% url 'studentProfile' %}"><i class="icon-build"></i>Profile Settings</a></li>
             <li><a class="logout-btn" href="{% url 'logout' %}"><i class="icon-log-out"></i>Signout</a></li>
         </ul>
     </div>
