@@ -1,19 +1,23 @@
-from django.shortcuts import redirect, render
-from django.http.response import HttpResponse
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from datetime import datetime
 from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import message
+from django.http.response import HttpResponse
+from django.shortcuts import redirect, render
+from django.utils.http import urlsafe_base64_decode
 
-
+from vendor.forms import VendorForm
 from .forms import UserForm
 from .models import User, UserProfile
 from django.contrib import messages, auth
-from vendor.forms import VendorForm
 from .utils import detectUser, send_verification_email
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 from django.core.exceptions import PermissionDenied
 from vendor.models import Vendor
 from django.template.defaultfilters import slugify
+from orders.models import Order
+import datetime
+
 
 
 
@@ -127,7 +131,7 @@ def registerVendor(request):
 def activate(request, uidb64, token):
     # Activate the user by setting the is_active status to True
     try:
-        uid = urlsafe_base64_encode(uidb64).decode()
+        uid = urlsafe_base64_decode(uidb64).decode()
         user = User._default_manager.get(pk=uid)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
@@ -174,7 +178,14 @@ def myAccount(request):
 @login_required(login_url='login')
 @user_passes_test(check_role_student)
 def studentDashboard(request):
-    return render(request, 'accounts/studentDashboard.html')
+    orders = Order.objects.filter(user=request.user, is_ordered=True)
+    recent_orders = orders[:5]
+    context = {
+        'orders': orders,
+        'orders_count': orders.count(),
+        'recent_orders': recent_orders,
+    }
+    return render(request, 'accounts/studentDashboard.html', context)
 
 @login_required(login_url='login')
 @user_passes_test(check_role_vendor)
