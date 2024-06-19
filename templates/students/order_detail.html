@@ -80,7 +80,7 @@
                                                             Subtotal
                                                             <span class="price float-right">
                                                                 <span class="currency">RM</span>
-                                                                <span id="subtotal">{{ subtotal }}</span>
+                                                                <span id="subtotal">{{ subtotal|floatformat:2 }}</span>
                                                             </span>
                                                         </li>
                             
@@ -90,7 +90,7 @@
                                                                     {{ key }} <small>({{ i }}%)</small>
                                                                     <span class="price float-right">
                                                                         <span class="currency">RM</span>
-                                                                        <span id="tax-{{ key }}">{{ j }}</span>
+                                                                        <span id="tax-{{ key }}">{{ j|floatformat:2 }}</span>
                                                                     </span>
                                                                 </li>
                                                             {% endfor %}
@@ -101,7 +101,7 @@
                                                             TOTAL
                                                             <span class="price float-right">
                                                                 <span class="currency">RM</span>
-                                                                <span id="total">{{ order.total }}</span>
+                                                                <span id="total">{{ order.total|floatformat:2 }}</span>
                                                             </span>
                                                         </li>
                                                     </ul>

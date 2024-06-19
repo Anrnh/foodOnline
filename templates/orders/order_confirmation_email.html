@@ -75,7 +75,7 @@
             <small><a href="http://{{ domain }}{% url 'vendor_detail' food.fooditem.vendor.vendor_slug %}" style="color:#ccc;">{{ food.fooditem.vendor.vendor_name }}</a></small>
             </td>
             <td>{{ food.quantity }}</td>
-            <td>RM{{ food.price }}</td>
+            <td>RM{{ food.price|floatformat:2 }}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -86,17 +86,17 @@
   <!-- Order amounts -->
   <table bgcolor="#EAF0F6" width="100%" role="presentation" border="0" cellpadding="0" cellspacing="10px" style="padding: 30px 30px 60px 60px;">
     <tbody>
-        <tr>Subtotal: RM{{ student_subtotal }}</tr>
+        <tr>Subtotal: RM{{ student_subtotal|floatformat:2 }}</tr>
         
         {% for key, val in tax_data.items %}
             {% for i, j in val.items %}
                 <tr>
-                    <td>{{ key }} <small>({{ i }}%)</small> : <span>RM{{ j }}</span></td>
+                    <td>{{ key }} <small>({{ i }}%)</small> : <span>RM{{ j|floatformat:2 }}</span></td>
                 </tr>
             {% endfor %}
         {% endfor %}
 
-        <tr>Grand total: RM{{ order.total }}</tr>
+        <tr>Grand total: RM{{ order.total|floatformat:2 }}</tr>
     </tbody>
   </table>
 
