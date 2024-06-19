@@ -7,7 +7,6 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage, message
 from django.conf import settings
 
-
 def detectUser(user):
     if user.role == 1:
         redirectUrl = 'vendorDashboard'
@@ -33,6 +32,7 @@ def send_verification_email(request, user, mail_subject, email_template):
     from_email = 'unimasstudentpavilion@gmail.com'
     to_email = user.email
     mail = EmailMessage(mail_subject, message, from_email, to=[to_email])
+    mail.content_subtype = "html"
     mail.send()
 
 def send_notification(mail_subject, mail_template, context):

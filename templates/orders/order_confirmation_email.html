@@ -32,7 +32,7 @@
   <table role="presentation" width="100%">
     <tr>
     <td  align="center" style="color: white;">
-     <img alt="unimaslogo" src="{% static 'logo/unimaslogo.png' %}" width="300px" align="middle">
+     <img alt="unimaslogo" src="https://www.unimas.my/images/Logo/identiti-visual-unimas-9.png" width="200px" align="middle">
       </td>
   </table>
 
@@ -86,7 +86,7 @@
   <!-- Order amounts -->
   <table bgcolor="#EAF0F6" width="100%" role="presentation" border="0" cellpadding="0" cellspacing="10px" style="padding: 30px 30px 60px 60px;">
     <tbody>
-        <tr>Subtotal: RM{{ customer_subtotal }}</tr>
+        <tr>Subtotal: RM{{ student_subtotal }}</tr>
         
         {% for key, val in tax_data.items %}
             {% for i, j in val.items %}
@@ -103,7 +103,7 @@
   <table role="presentation" bgcolor="#C33332" width="100%">
       <tr>
         <td align="center" style="padding: 15px 15px; color: #fff;">
-            <p>© {% now "Y" %} 2024 UNIMAS Student Pavilion Cafeteria, All Rights Reserved.</p>
+            <p>© {% now "Y" %} UNIMAS Student Pavilion Cafeteria, All Rights Reserved.</p>
             <a href="http://{{domain}}" style="color:#fff;">Visit Website</a>      
         </td>
       </tr>
