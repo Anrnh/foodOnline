@@ -5,6 +5,14 @@
     100% {bottom: -100%}
 }
 
+/* Custom CSS for better alignment */
+.login-option a, .login-option span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+
 .show-notification{
     position: fixed;
     bottom: 100%;
@@ -85,3 +93,4 @@ table > tbody > tr > td{
 table td, table th{
     line-height: 1rem !important;
 }
+
