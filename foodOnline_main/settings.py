@@ -26,6 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
+#Change local IP address for other devices used 
 ALLOWED_HOSTS = ['10.65.128.87', 'localhost', '127.0.0.1']
 
 
