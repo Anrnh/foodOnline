@@ -87,5 +87,19 @@
 </div>
 <!-- Main Section End -->
 
+<!-- Notification JavaScript -->
+<script>
+    const socket = new WebSocket('ws://' + window.location.host + '/ws/notifications/');
+
+    socket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        const message = data['message'];
+        alert('Notification: ' + message);
+    };
+
+    socket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+  </script>
 
 {% endblock %}

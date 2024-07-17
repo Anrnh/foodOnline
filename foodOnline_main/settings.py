@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
 
 #Change local IP address for other devices used 
-ALLOWED_HOSTS = ['10.65.128.87', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.43.110', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'marketplace',
     'students',
     'orders',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -85,6 +86,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'foodOnline_main.wsgi.application'
+
+# Channels configuration
+ASGI_APPLICATION = 'foodOnline_main.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 
 # Database

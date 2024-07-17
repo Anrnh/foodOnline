@@ -26,11 +26,13 @@ class Order(models.Model):
     STATUS = (
         ('New', 'New'),
         ('Accepted', 'Accepted'),
+        ('Preparing', 'Preparing'),
+        ('Ready', 'Ready'),
         ('Completed', 'Completed'),
         ('Cancelled', 'Cancelled'),
     )
 
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
     vendors = models.ManyToManyField(Vendor, blank=True)
     order_number = models.CharField(max_length=20)
@@ -48,10 +50,21 @@ class Order(models.Model):
     total_data = models.JSONField(blank=True, null=True)
     total_tax = models.FloatField()
     payment_method = models.CharField(max_length=25)
-    status = models.CharField(max_length=15, choices=STATUS, default='New')
     is_ordered = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=15, choices=STATUS, default='New')
+    guest_name = models.CharField(max_length=50)
+    guest_email = models.EmailField(max_length=50)
+    guest_phone = models.CharField(max_length=15, blank=True)
+
+     # Method to update status
+    def update_status(self, new_status):
+        if new_status in dict(self.STATUS):
+            self.status = new_status
+            self.save()
+        else:
+            raise ValueError(f"Invalid status: {new_status}. Must be one of {self.STATUS}")
 
     # Concatenate first name and last name
     @property
@@ -107,3 +120,15 @@ class OrderedFood(models.Model):
 
     def __str__(self):
         return self.fooditem.food_title
+    
+class Feedback(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    food_item = models.ForeignKey(FoodItem, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)]) # 1 to 5 rating
+    comment = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.food_item.name} - {self.rating}"
+    
