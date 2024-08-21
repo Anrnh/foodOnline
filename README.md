@@ -89,7 +89,7 @@ Make sure to follow our [contribution guidelines](CONTRIBUTING.md) for a smooth 
 
 ## 📄 License
 
-This project is licensed under the MIT License. Feel free to use, modify, and distribute as per the terms of the license. See the [LICENSE](LICENSE) file for more details.
+Feel free to use, modify, and distribute.
 
 ## 🙏 Acknowledgments
 
