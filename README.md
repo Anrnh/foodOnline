@@ -85,8 +85,6 @@ We believe in the power of collaboration. Contributions are more than welcome! I
 3. **Submit a PR**: Open a pull request with a clear description of what you’ve done.
 4. **Review & Merge**: After approval, your changes will be merged into the main branch.
 
-Make sure to follow our [contribution guidelines](CONTRIBUTING.md) for a smooth process.
-
 ## 📄 License
 
 Feel free to use, modify, and distribute.
